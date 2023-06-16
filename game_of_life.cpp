@@ -4,10 +4,12 @@
 #ifdef _WIN32
 #define WINDOWS_SYSTEM
 #define CLEAR "cls"
+#define SLEEP_FUNC Sleep
 #include <windows.h>
 #else
 #include <unistd.h>
-#define CLEAR clear
+#define CLEAR "clear"
+#define SLEEP_FUNC usleep
 #endif
 
 using namespace std;
@@ -257,9 +259,7 @@ int main(){
         showField(field, currentGeneration);
         updateLife(&field);
         currentGeneration++;
-        Sleep(90);
-        // break;
-        // std::this_thread::sleep_for(std::chrono::milliseconds(90));
+        SLEEP_FUNC(90);
     } while(true);
     destroyField(field);
 
