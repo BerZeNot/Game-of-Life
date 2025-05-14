@@ -11,6 +11,7 @@
 #define CLEAR "clear"
 #define SLEEP_FUNC usleep
 #endif
+#define SHOW_COL_N_ROW_NUMBERS false
 
 using namespace std;
 
@@ -44,6 +45,8 @@ void showField(Field field, int currGen){
     printf(" %d   ", currGen);
     int counter = 0;
     for(int i=0; i<field.nColumns; i++){
+        if(!SHOW_COL_N_ROW_NUMBERS)
+          break;
         if(counter == 0)
             cout << "| ";
         else
@@ -54,9 +57,12 @@ void showField(Field field, int currGen){
     }
     cout << "\n\n";
     for(int i=0; i<field.nRows; i++){
-        if(i<9)
+        if(SHOW_COL_N_ROW_NUMBERS) {
+          if(i<9) {
             cout << "0";
-        cout << i+1 << " - ";
+          }
+          cout << i+1 << " - ";
+        }
         for(int j=0; j<field.nColumns; j++){
             int posOnArray = j * field.nRows + i;
             if(field.matrix[posOnArray] == 0)
@@ -259,7 +265,7 @@ int main(){
         showField(field, currentGeneration);
         updateLife(&field);
         currentGeneration++;
-        SLEEP_FUNC(90);
+        SLEEP_FUNC(100000);
     } while(true);
     destroyField(field);
 
