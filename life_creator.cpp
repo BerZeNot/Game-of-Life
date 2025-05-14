@@ -7,7 +7,7 @@ void drawField(int *field, int fieldOrder) {
     for(int j =0; j < fieldOrder; j++) {
 
       positionOnArray = j * fieldOrder + i;
-      outChar = (field[positionOnArray] == 0) ? ". " : "@ ";
+      outChar = (field[positionOnArray] == 0) ? "□ " : "■ ";
       std::cout <<  outChar;
     }
     std::cout << "\n";
